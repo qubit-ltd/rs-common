@@ -39,7 +39,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-qubit-common = "0.3.0"
+qubit-common = "0.5.0"
 ```
 
 ## Quick Start
@@ -117,16 +117,25 @@ fn process_data(value: i32, items: &[String]) -> ArgumentResult<()> {
 
 ## Supported Data Types
 
+The [`DataType`](https://docs.rs/qubit-common/latest/qubit_common/lang/enum.DataType.html) enum lists every variant; string forms use `as_str()` (for example `int32`, `instant`, `stringmap`). Types below also note [`DataTypeOf`](https://docs.rs/qubit-common/latest/qubit_common/lang/trait.DataTypeOf.html) where implemented.
+
 ### Basic Types
 - **Integers**: `i8`, `i16`, `i32`, `i64`, `i128`, `u8`, `u16`, `u32`, `u64`, `u128`
+- **Platform integers**: `isize`, `usize` (`DataType::IntSize`, `DataType::UIntSize`)
 - **Floats**: `f32`, `f64`
 - **Other**: `bool`, `char`, `String`
 
 ### Date/Time Types
-- **Chrono Integration**: `NaiveDate`, `NaiveTime`, `NaiveDateTime`, `DateTime<Utc>`
+- **Chrono**: `NaiveDate` → `DataType::Date`, `NaiveTime` → `Time`, `NaiveDateTime` → `DateTime`, `DateTime<Utc>` → `Instant` (UTC instant, analogous to Java `Instant`)
 
 ### Big Number Types
 - **Arbitrary Precision**: `BigInt`, `BigDecimal`
+
+### Duration, Maps, JSON, and URL
+- **Duration**: `std::time::Duration` → `DataType::Duration`
+- **String map**: `HashMap<String, String>` → `DataType::StringMap`
+- **JSON value**: `serde_json::Value` → `DataType::Json`
+- **URL**: `url::Url` → `DataType::Url` with [`DataTypeOf`](https://docs.rs/qubit-common/latest/qubit_common/lang/trait.DataTypeOf.html) implemented; the crate depends on [`url`](https://crates.io/crates/url) so the convention is fixed at the type level.
 
 ## API Reference
 
@@ -175,6 +184,7 @@ match validate_input(value) {
 - **chrono**: Date and time handling
 - **num-bigint**: Big integer support
 - **regex**: Pattern matching
+- **url**: Parsed URL type (`url::Url`) bound to `DataType::Url`
 
 ## Testing & Code Coverage
 

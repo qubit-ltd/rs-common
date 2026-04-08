@@ -30,6 +30,7 @@ use serde::{
 use serde_json;
 use std::collections::HashMap;
 use std::time::Duration;
+use url::Url;
 
 /// Universal data type enumeration for cross-module type representation
 ///
@@ -315,6 +316,7 @@ impl std::fmt::Display for DataType {
 /// - **String Types**: `String`
 /// - **Date/Time Types**: `NaiveDate`, `NaiveTime`, `NaiveDateTime`, `DateTime<Utc>`
 /// - **Big Number Types**: `BigInt`, `BigDecimal`
+/// - **URL**: `url::Url`
 ///
 /// # Author
 ///
@@ -407,6 +409,10 @@ impl DataTypeOf for usize {
 // Standard library types
 impl DataTypeOf for Duration {
     const DATA_TYPE: DataType = DataType::Duration;
+}
+
+impl DataTypeOf for Url {
+    const DATA_TYPE: DataType = DataType::Url;
 }
 
 // String map type
