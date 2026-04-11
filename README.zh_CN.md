@@ -1,7 +1,7 @@
 # Qubit Common
 
-[![CircleCI](https://circleci.com/gh/qubit-ltd/rust-common.svg?style=shield)](https://circleci.com/gh/qubit-ltd/rust-common)
-[![Coverage Status](https://coveralls.io/repos/github/qubit-ltd/rust-common/badge.svg?branch=main)](https://coveralls.io/github/qubit-ltd/rust-common?branch=main)
+[![CircleCI](https://circleci.com/gh/qubit-ltd/rs-common.svg?style=shield)](https://circleci.com/gh/qubit-ltd/rs-common)
+[![Coverage Status](https://coveralls.io/repos/github/qubit-ltd/rs-common/badge.svg?branch=main)](https://coveralls.io/github/qubit-ltd/rs-common?branch=main)
 [![Crates.io](https://img.shields.io/crates/v/qubit-common.svg?color=blue)](https://crates.io/crates/qubit-common)
 [![Rust](https://img.shields.io/badge/rust-1.70+-blue.svg?logo=rust)](https://www.rust-lang.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
@@ -311,4 +311,4 @@ Copyright (c) 2025 - 2026. Haixing Hu, Qubit Co. Ltd. All rights reserved.
 
 ---
 
-项目仓库：[github.com/qubit-ltd/rust-common](https://github.com/qubit-ltd/rust-common)。
+项目仓库：[github.com/qubit-ltd/rs-common](https://github.com/qubit-ltd/rs-common)。
