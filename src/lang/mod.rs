@@ -29,12 +29,12 @@ pub use data_type::{
 
 // Re-export commonly used types
 pub use argument::{
-    check_argument,
-    check_state,
     ArgumentError,
     ArgumentResult,
     CollectionArgument,
     NumericArgument,
     OptionArgument,
     StringArgument,
+    check_argument,
+    check_state,
 };

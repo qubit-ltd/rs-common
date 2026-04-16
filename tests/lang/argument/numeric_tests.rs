@@ -7,9 +7,9 @@
  *
  ******************************************************************************/
 use qubit_common::{
+    NumericArgument,
     require_equal,
     require_not_equal,
-    NumericArgument,
 };
 
 #[test]

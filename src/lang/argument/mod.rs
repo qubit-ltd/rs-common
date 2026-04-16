@@ -69,8 +69,8 @@ pub mod string;
 
 // Re-export main types and traits
 pub use collection::{
-    require_element_non_null,
     CollectionArgument,
+    require_element_non_null,
 };
 pub use condition::{
     check_argument,
@@ -88,12 +88,12 @@ pub use error::{
     ArgumentResult,
 };
 pub use numeric::{
+    NumericArgument,
     require_equal,
     require_not_equal,
-    NumericArgument,
 };
 pub use option::{
-    require_null_or,
     OptionArgument,
+    require_null_or,
 };
 pub use string::StringArgument;

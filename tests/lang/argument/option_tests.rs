@@ -7,10 +7,10 @@
  *
  ******************************************************************************/
 use qubit_common::{
-    require_null_or,
     ArgumentError,
     ArgumentResult,
     OptionArgument,
+    require_null_or,
 };
 
 #[test]
@@ -58,9 +58,10 @@ fn require_non_null_and_and_validate_if_present() {
             }
         })
         .unwrap_err();
-    assert!(err2
-        .to_string()
-        .contains("Port must be greater than or equal to 1024"));
+    assert!(
+        err2.to_string()
+            .contains("Port must be greater than or equal to 1024")
+    );
 
     let none2: Option<u16> = None;
     let res2: ArgumentResult<Option<u16>> = none2.validate_if_present("port", |p| Ok(*p));
@@ -109,23 +110,27 @@ fn test_require_non_null_various_types() {
 fn test_require_non_null_and_edge_cases() {
     // Test boundary values
     let zero: Option<i32> = Some(0);
-    assert!(zero
-        .require_non_null_and("zero", |&v| v >= 0, "Must be non-negative")
-        .is_ok());
-    assert!(zero
-        .require_non_null_and("zero", |&v| v > 0, "Must be positive")
-        .is_err());
+    assert!(
+        zero.require_non_null_and("zero", |&v| v >= 0, "Must be non-negative")
+            .is_ok()
+    );
+    assert!(
+        zero.require_non_null_and("zero", |&v| v > 0, "Must be positive")
+            .is_err()
+    );
 
     // Test maximum and minimum values
     let max: Option<i32> = Some(i32::MAX);
-    assert!(max
-        .require_non_null_and("max", |&v| v > 0, "Must be positive")
-        .is_ok());
+    assert!(
+        max.require_non_null_and("max", |&v| v > 0, "Must be positive")
+            .is_ok()
+    );
 
     let min: Option<i32> = Some(i32::MIN);
-    assert!(min
-        .require_non_null_and("min", |&v| v < 0, "Must be negative")
-        .is_ok());
+    assert!(
+        min.require_non_null_and("min", |&v| v < 0, "Must be negative")
+            .is_ok()
+    );
 }
 
 #[test]
@@ -166,13 +171,15 @@ fn test_require_null_or_with_different_predicates() {
     let value: Option<i32> = Some(5);
 
     // Range check
-    assert!(require_null_or(
-        "value",
-        value,
-        |&v| (1..=10).contains(&v),
-        "Must be between 1-10"
-    )
-    .is_ok());
+    assert!(
+        require_null_or(
+            "value",
+            value,
+            |&v| (1..=10).contains(&v),
+            "Must be between 1-10"
+        )
+        .is_ok()
+    );
 
     // Even number check
     assert!(require_null_or("value", Some(4), |&v| v % 2 == 0, "Must be even").is_ok());
@@ -264,11 +271,11 @@ fn test_all_none_cases() {
 #[test]
 fn test_validate_if_present_validator_return() {
     // Ensure validator return value is handled correctly
+    use std::sync::Arc;
     use std::sync::atomic::{
         AtomicBool,
         Ordering,
     };
-    use std::sync::Arc;
 
     // Test that validator is actually called
     let called = Arc::new(AtomicBool::new(false));
@@ -485,10 +492,12 @@ fn test_require_non_null_closure_execution() {
     let none2: Option<String> = None;
     let result2 = none2.require_non_null("another_param_name");
     assert!(result2.is_err());
-    assert!(result2
-        .unwrap_err()
-        .to_string()
-        .contains("another_param_name"));
+    assert!(
+        result2
+            .unwrap_err()
+            .to_string()
+            .contains("another_param_name")
+    );
 
     let none3: Option<f64> = None;
     let result3 = none3.require_non_null("x");
@@ -557,10 +566,12 @@ fn test_validate_if_present_error_propagation() {
     });
 
     assert!(result2.is_err());
-    assert!(result2
-        .unwrap_err()
-        .to_string()
-        .contains("String length must be at least 5"));
+    assert!(
+        result2
+            .unwrap_err()
+            .to_string()
+            .contains("String length must be at least 5")
+    );
 
     // Test with custom error type
     let some3: Option<u32> = Some(0);
@@ -573,10 +584,12 @@ fn test_validate_if_present_error_propagation() {
     });
 
     assert!(result3.is_err());
-    assert!(result3
-        .unwrap_err()
-        .to_string()
-        .contains("Count cannot be zero"));
+    assert!(
+        result3
+            .unwrap_err()
+            .to_string()
+            .contains("Count cannot be zero")
+    );
 }
 
 #[test]
@@ -750,10 +763,12 @@ fn test_multiple_error_scenarios() {
     let some_val = Some(5);
     let result = some_val.require_non_null_and("val", |&v| v > 10, "must be greater than 10");
     assert!(result.is_err());
-    assert!(result
-        .unwrap_err()
-        .to_string()
-        .contains("must be greater than 10"));
+    assert!(
+        result
+            .unwrap_err()
+            .to_string()
+            .contains("must be greater than 10")
+    );
 
     // Error from validate_if_present validator
     let some_val2 = Some(3);

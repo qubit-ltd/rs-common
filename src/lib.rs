@@ -23,6 +23,13 @@ pub mod util;
 // Re-export main types from lang module
 pub use lang::{
     argument::{
+        ArgumentError,
+        ArgumentResult,
+        CollectionArgument,
+        NumericArgument,
+        OptionArgument,
+        // String functions
+        StringArgument,
         // Core functions
         check_argument,
         // Condition functions
@@ -41,13 +48,6 @@ pub use lang::{
         require_not_equal,
         // Option functions
         require_null_or,
-        ArgumentError,
-        ArgumentResult,
-        CollectionArgument,
-        NumericArgument,
-        OptionArgument,
-        // String functions
-        StringArgument,
     },
     box_error::{
         BoxError,

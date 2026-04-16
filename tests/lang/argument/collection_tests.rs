@@ -7,8 +7,8 @@
  *
  ******************************************************************************/
 use qubit_common::{
-    require_element_non_null,
     CollectionArgument,
+    require_element_non_null,
 };
 
 #[test]
