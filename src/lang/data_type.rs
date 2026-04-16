@@ -30,6 +30,7 @@ use serde::{
 use serde_json;
 use std::collections::HashMap;
 use std::time::Duration;
+use parse_display::{Display, FromStr as DeriveFromStr};
 use url::Url;
 
 /// Universal data type enumeration for cross-module type representation
@@ -104,79 +105,126 @@ use url::Url;
 ///
 /// Haixing Hu
 ///
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Display, DeriveFromStr)]
 pub enum DataType {
     /// Boolean type
+    #[display("bool")]
+    #[from_str(regex = "(?i)bool")]
     Bool,
     /// Character type
+    #[display("char")]
+    #[from_str(regex = "(?i)char")]
     Char,
     /// 8-bit signed integer
+    #[display("int8")]
+    #[from_str(regex = "(?i)int8")]
     Int8,
     /// 16-bit signed integer
+    #[display("int16")]
+    #[from_str(regex = "(?i)int16")]
     Int16,
     /// 32-bit signed integer
+    #[display("int32")]
+    #[from_str(regex = "(?i)int32")]
     Int32,
     /// 64-bit signed integer
+    #[display("int64")]
+    #[from_str(regex = "(?i)int64")]
     Int64,
     /// 128-bit signed integer
+    #[display("int128")]
+    #[from_str(regex = "(?i)int128")]
     Int128,
     /// 8-bit unsigned integer
+    #[display("uint8")]
+    #[from_str(regex = "(?i)uint8")]
     UInt8,
     /// 16-bit unsigned integer
+    #[display("uint16")]
+    #[from_str(regex = "(?i)uint16")]
     UInt16,
     /// 32-bit unsigned integer
+    #[display("uint32")]
+    #[from_str(regex = "(?i)uint32")]
     UInt32,
     /// 64-bit unsigned integer
+    #[display("uint64")]
+    #[from_str(regex = "(?i)uint64")]
     UInt64,
     /// 128-bit unsigned integer
+    #[display("uint128")]
+    #[from_str(regex = "(?i)uint128")]
     UInt128,
     /// 32-bit floating point number
+    #[display("float32")]
+    #[from_str(regex = "(?i)float32")]
     Float32,
     /// 64-bit floating point number
+    #[display("float64")]
+    #[from_str(regex = "(?i)float64")]
     Float64,
     /// String type
+    #[display("string")]
+    #[from_str(regex = "(?i)string")]
     String,
     /// Date type (NaiveDate)
+    #[display("date")]
+    #[from_str(regex = "(?i)date")]
     Date,
     /// Time type (NaiveTime)
+    #[display("time")]
+    #[from_str(regex = "(?i)time")]
     Time,
     /// DateTime type (NaiveDateTime)
+    #[display("datetime")]
+    #[from_str(regex = "(?i)datetime")]
     DateTime,
-    /// UTC time point (equivalent to Java Instant) (`DateTime<Utc>`)
+    /// UTC time point (equivalent to Java Instant) (`DateTime<Utc>`) 
+    #[display("instant")]
+    #[from_str(regex = "(?i)instant")]
     Instant,
     /// Big integer type (BigInt)
+    #[display("biginteger")]
+    #[from_str(regex = "(?i)biginteger")]
     BigInteger,
     /// Big decimal type (BigDecimal)
+    #[display("bigdecimal")]
+    #[from_str(regex = "(?i)bigdecimal")]
     BigDecimal,
     /// Platform-dependent signed integer (isize)
+    #[display("intsize")]
+    #[from_str(regex = "(?i)intsize")]
     IntSize,
     /// Platform-dependent unsigned integer (usize)
+    #[display("uintsize")]
+    #[from_str(regex = "(?i)uintsize")]
     UIntSize,
     /// Duration type (std::time::Duration)
+    #[display("duration")]
+    #[from_str(regex = "(?i)duration")]
     Duration,
     /// URL type (url::Url)
+    #[display("url")]
+    #[from_str(regex = "(?i)url")]
     Url,
     /// String map type (HashMap<String, String>)
+    #[display("stringmap")]
+    #[from_str(regex = "(?i)stringmap")]
     StringMap,
     /// JSON value type (serde_json::Value)
+    #[display("json")]
+    #[from_str(regex = "(?i)json")]
     Json,
 }
 
 impl DataType {
-    /// Get the string representation of the data type
+    // Keep explicit conversion helper for existing call-sites and API parity with
+    // current serialized/configuration text values.
+    /// Get the string representation of the data type.
     ///
     /// # Returns
     ///
-    /// Returns the name string of the data type
-    ///
-    /// # Examples
-    ///
-    /// ```rust,ignore
-    /// use qubit_common::lang::DataType;
-    ///
-    /// assert_eq!(DataType::Int32.as_str(), "int32");
-    /// assert_eq!(DataType::String.as_str(), "string");
-    /// ```
+    /// Returns the name string of the data type.
     #[inline]
     pub const fn as_str(&self) -> &'static str {
         match self {
@@ -208,12 +256,6 @@ impl DataType {
             DataType::StringMap => "stringmap",
             DataType::Json => "json",
         }
-    }
-}
-
-impl std::fmt::Display for DataType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.as_str())
     }
 }
 

@@ -15,6 +15,7 @@
 //! Haixing Hu
 
 use qubit_common::DataType;
+use std::str::FromStr;
 
 /// Test DataType::as_str method for all data types
 #[test]
@@ -187,6 +188,26 @@ fn test_data_type_display_v040_types() {
     assert_eq!(DataType::Url.to_string(), "url");
     assert_eq!(DataType::StringMap.to_string(), "stringmap");
     assert_eq!(DataType::Json.to_string(), "json");
+}
+
+#[test]
+fn test_data_type_from_str_all_types() {
+    assert_eq!(DataType::from_str("bool").unwrap(), DataType::Bool);
+    assert_eq!(DataType::from_str("char").unwrap(), DataType::Char);
+    assert_eq!(DataType::from_str("Int32").unwrap(), DataType::Int32);
+    assert_eq!(DataType::from_str("stringmap").unwrap(), DataType::StringMap);
+    assert_eq!(DataType::from_str("json").unwrap(), DataType::Json);
+}
+
+#[test]
+fn test_data_type_from_str_with_case_insensitive_match() {
+    assert_eq!(DataType::from_str("UINT64").unwrap(), DataType::UInt64);
+    assert_eq!(DataType::from_str("BigDecimal").unwrap(), DataType::BigDecimal);
+}
+
+#[test]
+fn test_data_type_from_str_invalid() {
+    assert!(DataType::from_str("not-a-type").is_err());
 }
 
 /// Test equality for v0.4.0 new types
