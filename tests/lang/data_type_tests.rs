@@ -15,7 +15,57 @@
 //! Haixing Hu
 
 use qubit_common::DataType;
+use std::collections::HashSet;
 use std::str::FromStr;
+
+/// Returns all DataType variants for exhaustive tests.
+fn all_data_types() -> [DataType; 27] {
+    [
+        DataType::Bool,
+        DataType::Char,
+        DataType::Int8,
+        DataType::Int16,
+        DataType::Int32,
+        DataType::Int64,
+        DataType::Int128,
+        DataType::UInt8,
+        DataType::UInt16,
+        DataType::UInt32,
+        DataType::UInt64,
+        DataType::UInt128,
+        DataType::Float32,
+        DataType::Float64,
+        DataType::String,
+        DataType::Date,
+        DataType::Time,
+        DataType::DateTime,
+        DataType::Instant,
+        DataType::BigInteger,
+        DataType::BigDecimal,
+        DataType::IntSize,
+        DataType::UIntSize,
+        DataType::Duration,
+        DataType::Url,
+        DataType::StringMap,
+        DataType::Json,
+    ]
+}
+
+/// Ensure `as_str()` mapping is exhaustive, unique, and consistent with Display.
+#[test]
+fn test_data_type_as_str_display_consistency_and_uniqueness() {
+    let mut names = HashSet::new();
+    for data_type in all_data_types() {
+        let name = data_type.as_str();
+        assert!(
+            names.insert(name),
+            "Duplicate as_str() value found: {}",
+            name
+        );
+        assert_eq!(data_type.to_string(), name);
+    }
+    assert_eq!(names.len(), 27);
+}
 
 /// Test DataType::as_str method for all data types
 #[test]
@@ -128,35 +178,7 @@ fn test_data_type_equality() {
 #[test]
 fn test_data_type_debug() {
     // Ensure all types can be properly Debug output
-    let types = vec![
-        DataType::Bool,
-        DataType::Char,
-        DataType::Int8,
-        DataType::Int16,
-        DataType::Int32,
-        DataType::Int64,
-        DataType::Int128,
-        DataType::UInt8,
-        DataType::UInt16,
-        DataType::UInt32,
-        DataType::UInt64,
-        DataType::UInt128,
-        DataType::Float32,
-        DataType::Float64,
-        DataType::String,
-        DataType::Date,
-        DataType::Time,
-        DataType::DateTime,
-        DataType::Instant,
-        DataType::BigInteger,
-        DataType::BigDecimal,
-        DataType::IntSize,
-        DataType::UIntSize,
-        DataType::Duration,
-        DataType::Url,
-        DataType::StringMap,
-        DataType::Json,
-    ];
+    let types = all_data_types();
 
     for dt in types {
         let debug_str = format!("{:?}", dt);
