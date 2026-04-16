@@ -337,6 +337,17 @@ fn test_all_success_branches_for_string() {
 }
 
 #[test]
+fn test_string_impl_returns_same_reference_after_validation() {
+    let text = String::from("delegate");
+    let validated = text.require_non_blank("text").unwrap();
+    assert!(std::ptr::eq(validated, &text));
+
+    let regex = Regex::new(r"^[a-z]+$").unwrap();
+    let validated2 = text.require_match("text", &regex).unwrap();
+    assert!(std::ptr::eq(validated2, &text));
+}
+
+#[test]
 fn test_length_in_range_min_boundary() {
     // Test min_length boundary
     let text = "abc";

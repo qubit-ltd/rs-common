@@ -330,49 +330,26 @@ impl StringArgument for str {
 impl StringArgument for String {
     #[inline]
     fn require_non_blank(&self, name: &str) -> ArgumentResult<&Self> {
-        if self.trim().is_empty() {
-            return Err(ArgumentError::new(format!(
-                "Parameter '{}' cannot be empty or contain only whitespace characters",
-                name
-            )));
-        }
-        Ok(self)
+        self.as_str().require_non_blank(name).map(|_| self)
     }
 
     #[inline]
     fn require_length_be(&self, name: &str, length: usize) -> ArgumentResult<&Self> {
-        let actual_length = self.len();
-        if actual_length != length {
-            return Err(ArgumentError::new(format!(
-                "Parameter '{}' length must be {} but was {}",
-                name, length, actual_length
-            )));
-        }
-        Ok(self)
+        self.as_str().require_length_be(name, length).map(|_| self)
     }
 
     #[inline]
     fn require_length_at_least(&self, name: &str, min_length: usize) -> ArgumentResult<&Self> {
-        let actual_length = self.len();
-        if actual_length < min_length {
-            return Err(ArgumentError::new(format!(
-                "Parameter '{}' length must be at least {} but was {}",
-                name, min_length, actual_length
-            )));
-        }
-        Ok(self)
+        self.as_str()
+            .require_length_at_least(name, min_length)
+            .map(|_| self)
     }
 
     #[inline]
     fn require_length_at_most(&self, name: &str, max_length: usize) -> ArgumentResult<&Self> {
-        let actual_length = self.len();
-        if actual_length > max_length {
-            return Err(ArgumentError::new(format!(
-                "Parameter '{}' length must be at most {} but was {}",
-                name, max_length, actual_length
-            )));
-        }
-        Ok(self)
+        self.as_str()
+            .require_length_at_most(name, max_length)
+            .map(|_| self)
     }
 
     #[inline]
@@ -382,37 +359,18 @@ impl StringArgument for String {
         min_length: usize,
         max_length: usize,
     ) -> ArgumentResult<&Self> {
-        let actual_length = self.len();
-        if actual_length < min_length || actual_length > max_length {
-            return Err(ArgumentError::new(format!(
-                "Parameter '{}' length must be in range [{}, {}] but was {}",
-                name, min_length, max_length, actual_length
-            )));
-        }
-        Ok(self)
+        self.as_str()
+            .require_length_in_range(name, min_length, max_length)
+            .map(|_| self)
     }
 
     #[inline]
     fn require_match(&self, name: &str, pattern: &Regex) -> ArgumentResult<&Self> {
-        if !pattern.is_match(self) {
-            return Err(ArgumentError::new(format!(
-                "Parameter '{}' must match pattern '{}'",
-                name,
-                pattern.as_str()
-            )));
-        }
-        Ok(self)
+        self.as_str().require_match(name, pattern).map(|_| self)
     }
 
     #[inline]
     fn require_not_match(&self, name: &str, pattern: &Regex) -> ArgumentResult<&Self> {
-        if pattern.is_match(self) {
-            return Err(ArgumentError::new(format!(
-                "Parameter '{}' cannot match pattern '{}'",
-                name,
-                pattern.as_str()
-            )));
-        }
-        Ok(self)
+        self.as_str().require_not_match(name, pattern).map(|_| self)
     }
 }

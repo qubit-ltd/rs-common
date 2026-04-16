@@ -69,3 +69,13 @@ fn require_element_non_null_checks() {
     let err2 = require_element_non_null("items", &none_first).unwrap_err();
     assert!(err2.message().contains("element at index 0"));
 }
+
+#[test]
+fn vec_impl_returns_same_reference_after_validation() {
+    let values = vec![1, 2, 3];
+    let validated = values.require_non_empty("values").unwrap();
+    assert!(std::ptr::eq(validated, &values));
+
+    let validated2 = values.require_length_in_range("values", 1, 3).unwrap();
+    assert!(std::ptr::eq(validated2, &values));
+}
