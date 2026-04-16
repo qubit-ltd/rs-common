@@ -33,7 +33,7 @@ use super::error::{
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_argument;
 ///
 /// let age = 25;
@@ -66,7 +66,7 @@ pub fn check_argument(condition: bool) -> ArgumentResult<()> {
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_argument_with_message;
 ///
 /// let count = 5;
@@ -103,7 +103,7 @@ pub fn check_argument_with_message(condition: bool, message: &str) -> ArgumentRe
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_argument_fmt;
 ///
 /// let value = 150;
@@ -141,7 +141,7 @@ pub fn check_argument_fmt(condition: bool, message: String) -> ArgumentResult<()
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_state;
 ///
 /// let is_initialized = true;
@@ -173,7 +173,7 @@ pub fn check_state(condition: bool) -> ArgumentResult<()> {
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_state_with_message;
 ///
 /// let is_connected = false;
@@ -212,7 +212,7 @@ pub fn check_state_with_message(condition: bool, message: &str) -> ArgumentResul
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_bounds;
 ///
 /// let buffer_len = 100;
@@ -256,7 +256,7 @@ pub fn check_bounds(offset: usize, length: usize, total_length: usize) -> Argume
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_element_index;
 ///
 /// let list_size = 10;
@@ -294,7 +294,7 @@ pub fn check_element_index(index: usize, size: usize) -> ArgumentResult<usize> {
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_position_index;
 ///
 /// let list_size = 10;
@@ -331,7 +331,7 @@ pub fn check_position_index(index: usize, size: usize) -> ArgumentResult<usize> 
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::check_position_indexes;
 ///
 /// let list_size = 10;

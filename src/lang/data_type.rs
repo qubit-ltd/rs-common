@@ -65,7 +65,7 @@ use url::Url;
 ///
 /// ## Basic Usage
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::DataType;
 ///
 /// let data_type = DataType::Int32;
@@ -75,7 +75,7 @@ use url::Url;
 ///
 /// ## Type Checking
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::DataType;
 ///
 /// fn is_numeric(data_type: DataType) -> bool {
@@ -92,7 +92,7 @@ use url::Url;
 ///
 /// ## Serialization
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::DataType;
 /// use serde_json;
 ///
@@ -237,7 +237,7 @@ impl DataType {
 ///
 /// ## Basic Usage
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::{DataType, DataTypeOf};
 ///
 /// // Get the data type for a specific type
@@ -248,7 +248,7 @@ impl DataType {
 ///
 /// ## Generic Function Example
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::{DataType, DataTypeOf};
 ///
 /// fn get_type_name<T: DataTypeOf>() -> &'static str {
@@ -262,7 +262,7 @@ impl DataType {
 ///
 /// ## Generic Value Container Example
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::{DataType, DataTypeOf};
 ///
 /// struct TypedValue<T: DataTypeOf> {
@@ -289,7 +289,7 @@ impl DataType {
 ///
 /// ## Type Validation Example
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::{DataType, DataTypeOf};
 ///
 /// fn validate_numeric_type<T: DataTypeOf>() -> bool {

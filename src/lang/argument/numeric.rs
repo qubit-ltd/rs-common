@@ -105,7 +105,7 @@ fn reject_nan<T: NumericValue>(name: &str, value: T) -> ArgumentResult<()> {
 ///
 /// Basic usage (returns `ArgumentResult`):
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::{NumericArgument, ArgumentResult};
 ///
 /// fn set_volume(volume: i32) -> ArgumentResult<()> {
@@ -117,7 +117,7 @@ fn reject_nan<T: NumericValue>(name: &str, value: T) -> ArgumentResult<()> {
 ///
 /// Converting to other error types:
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::NumericArgument;
 ///
 /// fn set_volume(volume: i32) -> Result<(), String> {
@@ -147,7 +147,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value: i32 = 0;
@@ -170,7 +170,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value: i32 = 10;
@@ -193,7 +193,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value: i32 = 10;
@@ -216,7 +216,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value: i32 = 0;
@@ -239,7 +239,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value: i32 = -5;
@@ -262,7 +262,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value: i32 = 0;
@@ -290,7 +290,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 50;
@@ -315,7 +315,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 50;
@@ -340,7 +340,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 100;
@@ -365,7 +365,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 0;
@@ -389,7 +389,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 50;
@@ -413,7 +413,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 100;
@@ -437,7 +437,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 50;
@@ -461,7 +461,7 @@ pub trait NumericArgument: Sized {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::NumericArgument;
     ///
     /// let value = 0;
@@ -693,7 +693,7 @@ where
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::require_equal;
 ///
 /// let result = require_equal("width", 100, "height", 100);
@@ -731,7 +731,7 @@ where
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::require_not_equal;
 ///
 /// let result = require_not_equal("min", 0, "max", 100);

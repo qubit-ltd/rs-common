@@ -26,7 +26,7 @@
 //!
 //! # Usage Examples
 //!
-//! ```rust,ignore
+//! ```rust
 //! use qubit_common::lang::argument::{
 //!     NumericArgument, StringArgument, CollectionArgument, ArgumentResult
 //! };

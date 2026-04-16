@@ -28,7 +28,7 @@ use std::fmt;
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::ArgumentError;
 ///
 /// let error = ArgumentError::new("Invalid argument");
@@ -53,7 +53,7 @@ impl ArgumentError {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::ArgumentError;
     ///
     /// let error = ArgumentError::new("Value cannot be negative");
@@ -104,7 +104,7 @@ impl From<&str> for ArgumentError {
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::{ArgumentResult, ArgumentError};
 ///
 /// fn validate_positive(value: i32) -> ArgumentResult<i32> {

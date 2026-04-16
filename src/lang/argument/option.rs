@@ -44,7 +44,7 @@ use super::error::{
 ///
 /// Basic usage (returns `ArgumentResult`):
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::{OptionArgument, ArgumentResult};
 ///
 /// fn process_config(timeout: Option<u64>) -> ArgumentResult<()> {
@@ -56,7 +56,7 @@ use super::error::{
 ///
 /// Converting to other error types:
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::OptionArgument;
 ///
 /// fn process_config(timeout: Option<u64>) -> Result<(), String> {
@@ -80,7 +80,7 @@ pub trait OptionArgument<T> {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::OptionArgument;
     ///
     /// let value: Option<i32> = Some(42);
@@ -105,7 +105,7 @@ pub trait OptionArgument<T> {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::OptionArgument;
     ///
     /// let age: Option<u8> = Some(25);
@@ -138,7 +138,7 @@ pub trait OptionArgument<T> {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::OptionArgument;
     ///
     /// let port: Option<u16> = Some(8080);
@@ -218,7 +218,7 @@ impl<T> OptionArgument<T> for Option<T> {
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::require_null_or;
 ///
 /// let value: Option<i32> = Some(10);

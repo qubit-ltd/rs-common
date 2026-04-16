@@ -45,7 +45,7 @@ use regex::Regex;
 ///
 /// Basic usage (returns `ArgumentResult`):
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::{StringArgument, ArgumentResult};
 ///
 /// fn set_username(username: &str) -> ArgumentResult<()> {
@@ -59,7 +59,7 @@ use regex::Regex;
 ///
 /// Converting to other error types:
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::StringArgument;
 ///
 /// fn set_username(username: &str) -> Result<(), String> {
@@ -86,7 +86,7 @@ pub trait StringArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::StringArgument;
     ///
     /// let text = "hello";
@@ -110,7 +110,7 @@ pub trait StringArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::StringArgument;
     ///
     /// let code = "ABC12";
@@ -134,7 +134,7 @@ pub trait StringArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::StringArgument;
     ///
     /// let password = "secret123";
@@ -155,7 +155,7 @@ pub trait StringArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::StringArgument;
     ///
     /// let description = "Short text";
@@ -177,7 +177,7 @@ pub trait StringArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::StringArgument;
     ///
     /// let username = "alice";
@@ -203,7 +203,7 @@ pub trait StringArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::StringArgument;
     /// use regex::Regex;
     ///
@@ -226,7 +226,7 @@ pub trait StringArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::StringArgument;
     /// use regex::Regex;
     ///

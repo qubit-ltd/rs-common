@@ -40,7 +40,7 @@ use super::error::{
 ///
 /// Basic usage (returns `ArgumentResult`):
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::{CollectionArgument, ArgumentResult};
 ///
 /// fn process_items(items: &[String]) -> ArgumentResult<()> {
@@ -52,7 +52,7 @@ use super::error::{
 ///
 /// Converting to other error types:
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::CollectionArgument;
 ///
 /// fn process_items(items: &[String]) -> Result<(), String> {
@@ -82,7 +82,7 @@ pub trait CollectionArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::CollectionArgument;
     ///
     /// let items = vec![1, 2, 3];
@@ -106,7 +106,7 @@ pub trait CollectionArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::CollectionArgument;
     ///
     /// let coordinates = vec![1, 2, 3];
@@ -127,7 +127,7 @@ pub trait CollectionArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::CollectionArgument;
     ///
     /// let items = vec![1, 2, 3, 4, 5];
@@ -148,7 +148,7 @@ pub trait CollectionArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::CollectionArgument;
     ///
     /// let items = vec![1, 2, 3];
@@ -170,7 +170,7 @@ pub trait CollectionArgument {
     ///
     /// # Examples
     ///
-    /// ```rust,ignore
+    /// ```rust
     /// use qubit_common::lang::argument::CollectionArgument;
     ///
     /// let items = vec![1, 2, 3];
@@ -305,7 +305,7 @@ impl<T> CollectionArgument for Vec<T> {
 ///
 /// # Examples
 ///
-/// ```rust,ignore
+/// ```rust
 /// use qubit_common::lang::argument::require_element_non_null;
 ///
 /// let items = vec![Some(1), Some(2), Some(3)];
