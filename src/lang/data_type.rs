@@ -24,11 +24,15 @@ use chrono::{
 };
 use num_bigint::BigInt;
 use serde::{
+    de,
     Deserialize,
+    Deserializer,
     Serialize,
+    Serializer,
 };
 use serde_json;
 use std::collections::HashMap;
+use std::str::FromStr;
 use std::time::Duration;
 use parse_display::{Display, FromStr as DeriveFromStr};
 use url::Url;
@@ -105,7 +109,7 @@ use url::Url;
 ///
 /// Haixing Hu
 ///
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Display, DeriveFromStr)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Display, DeriveFromStr)]
 pub enum DataType {
     /// Boolean type
     #[display("bool")]
@@ -256,6 +260,39 @@ impl DataType {
             DataType::StringMap => "stringmap",
             DataType::Json => "json",
         }
+    }
+}
+
+impl Serialize for DataType {
+    /// Serializes `DataType` using the canonical lowercase protocol string.
+    ///
+    /// This keeps serde output aligned with `Display` and `as_str()`.
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for DataType {
+    /// Deserializes `DataType` from case-insensitive protocol strings.
+    ///
+    /// Accepted inputs include canonical lowercase values (e.g. `"int32"`)
+    /// and historical enum-like forms (e.g. `"Int32"`).
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let value = String::deserialize(deserializer)?;
+        DataType::from_str(&value).map_err(|_| {
+            de::Error::custom(format!(
+                "Invalid DataType '{}': expected one of bool, char, int8, int16, int32, int64, int128, \
+                 uint8, uint16, uint32, uint64, uint128, float32, float64, string, date, time, datetime, \
+                 instant, biginteger, bigdecimal, intsize, uintsize, duration, url, stringmap, json",
+                value
+            ))
+        })
     }
 }
 

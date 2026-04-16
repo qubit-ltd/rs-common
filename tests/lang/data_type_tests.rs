@@ -269,18 +269,18 @@ fn test_data_type_copy_v040_types() {
 
 /// Test serde serialization for v0.4.0 new types
 ///
-/// serde 默认使用变体名（PascalCase），与现有变体保持一致
+/// serde uses canonical lowercase protocol strings, aligned with `as_str()`.
 #[test]
 fn test_data_type_serde_v040_types() {
     use serde_json;
 
     let cases = [
-        (DataType::IntSize, "\"IntSize\""),
-        (DataType::UIntSize, "\"UIntSize\""),
-        (DataType::Duration, "\"Duration\""),
-        (DataType::Url, "\"Url\""),
-        (DataType::StringMap, "\"StringMap\""),
-        (DataType::Json, "\"Json\""),
+        (DataType::IntSize, "\"intsize\""),
+        (DataType::UIntSize, "\"uintsize\""),
+        (DataType::Duration, "\"duration\""),
+        (DataType::Url, "\"url\""),
+        (DataType::StringMap, "\"stringmap\""),
+        (DataType::Json, "\"json\""),
     ];
 
     for (dt, expected_json) in cases {
@@ -293,6 +293,38 @@ fn test_data_type_serde_v040_types() {
 
         let deserialized: DataType = serde_json::from_str(&serialized).unwrap();
         assert_eq!(deserialized, dt, "Deserialization mismatch for {:?}", dt);
+    }
+}
+
+#[test]
+fn test_data_type_serde_all_types_use_as_str_protocol() {
+    use serde_json;
+
+    for data_type in all_data_types() {
+        let serialized = serde_json::to_string(&data_type).unwrap();
+        assert_eq!(serialized, format!("\"{}\"", data_type.as_str()));
+
+        let deserialized: DataType = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(deserialized, data_type);
+    }
+}
+
+#[test]
+fn test_data_type_deserialize_accepts_legacy_pascal_case() {
+    use serde_json;
+
+    let cases = [
+        ("\"Bool\"", DataType::Bool),
+        ("\"Int32\"", DataType::Int32),
+        ("\"DateTime\"", DataType::DateTime),
+        ("\"BigDecimal\"", DataType::BigDecimal),
+        ("\"IntSize\"", DataType::IntSize),
+        ("\"StringMap\"", DataType::StringMap),
+    ];
+
+    for (raw, expected) in cases {
+        let deserialized: DataType = serde_json::from_str(raw).unwrap();
+        assert_eq!(deserialized, expected);
     }
 }
 
