@@ -178,8 +178,6 @@ match validate_input(value) {
 
 - **serde**：序列化支持
 - **serde_json**：JSON 序列化
-- **thiserror**：错误处理
-- **tracing**：日志支持
 - **bigdecimal**：任意精度十进制算术
 - **chrono**：日期和时间处理
 - **num-bigint**：大整数支持

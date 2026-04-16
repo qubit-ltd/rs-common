@@ -178,8 +178,6 @@ match validate_input(value) {
 
 - **serde**: Serialization support
 - **serde_json**: JSON serialization
-- **thiserror**: Error handling
-- **tracing**: Logging support
 - **bigdecimal**: Arbitrary precision decimal arithmetic
 - **chrono**: Date and time handling
 - **num-bigint**: Big integer support

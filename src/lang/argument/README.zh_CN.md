@@ -26,7 +26,7 @@ argument/
 支持所有实现 `PartialOrd + Default + Display + Copy` 的类型。
 
 ```rust
-use common_rs::lang::argument::NumericArgument;
+use qubit_common::lang::argument::NumericArgument;
 
 // 验证非负
 let count = 10;
@@ -64,7 +64,7 @@ let age = age
 支持 `&str` 和 `String` 类型。
 
 ```rust
-use common_rs::lang::argument::StringArgument;
+use qubit_common::lang::argument::StringArgument;
 
 // 验证非空白
 let username = "alice";
@@ -97,7 +97,7 @@ let email = email.require_match("email", &pattern)?;
 支持 `&[T]` 和 `Vec<T>` 类型。
 
 ```rust
-use common_rs::lang::argument::CollectionArgument;
+use qubit_common::lang::argument::CollectionArgument;
 
 // 验证非空
 let items = vec![1, 2, 3];
@@ -122,7 +122,7 @@ let tags = tags
 支持 `Option<T>` 类型。
 
 ```rust
-use common_rs::lang::argument::OptionArgument;
+use qubit_common::lang::argument::OptionArgument;
 
 // 验证非空
 let timeout: Option<u64> = Some(30);
@@ -157,7 +157,7 @@ let max_conn = max_conn.validate_if_present("max_connections", |c| {
 通用的条件和状态验证函数。
 
 ```rust
-use common_rs::lang::argument::{check_argument, check_state, check_bounds};
+use qubit_common::lang::argument::{check_argument, check_state, check_bounds};
 
 // 基本条件检查
 let is_valid = true;
@@ -192,7 +192,7 @@ let index = check_element_index(5, list_size)?;
 所有验证方法返回 `ArgumentResult<T>`，这是 `Result<T, ArgumentError>` 的类型别名。
 
 ```rust
-use common_rs::lang::argument::{ArgumentError, ArgumentResult};
+use qubit_common::lang::argument::{ArgumentError, ArgumentResult};
 
 fn validate_config(port: u16, timeout: u64) -> ArgumentResult<()> {
     port.require_in_closed_range("port", 1024, 65535)?;

@@ -26,7 +26,7 @@ argument/
 Supports all types that implement `PartialOrd + Default + Display + Copy`.
 
 ```rust
-use common_rs::lang::argument::NumericArgument;
+use qubit_common::lang::argument::NumericArgument;
 
 // Validate non-negative
 let count = 10;
@@ -64,7 +64,7 @@ let age = age
 Supports `&str` and `String` types.
 
 ```rust
-use common_rs::lang::argument::StringArgument;
+use qubit_common::lang::argument::StringArgument;
 
 // Validate non-blank
 let username = "alice";
@@ -97,7 +97,7 @@ let email = email.require_match("email", &pattern)?;
 Supports `&[T]` and `Vec<T>` types.
 
 ```rust
-use common_rs::lang::argument::CollectionArgument;
+use qubit_common::lang::argument::CollectionArgument;
 
 // Validate non-empty
 let items = vec![1, 2, 3];
@@ -122,7 +122,7 @@ let tags = tags
 Supports `Option<T>` types.
 
 ```rust
-use common_rs::lang::argument::OptionArgument;
+use qubit_common::lang::argument::OptionArgument;
 
 // Validate non-null
 let timeout: Option<u64> = Some(30);
@@ -157,7 +157,7 @@ let max_conn = max_conn.validate_if_present("max_connections", |c| {
 General condition and state validation functions.
 
 ```rust
-use common_rs::lang::argument::{check_argument, check_state, check_bounds};
+use qubit_common::lang::argument::{check_argument, check_state, check_bounds};
 
 // Basic condition check
 let is_valid = true;
@@ -192,7 +192,7 @@ let index = check_element_index(5, list_size)?;
 All validation methods return `ArgumentResult<T>`, which is a type alias for `Result<T, ArgumentError>`.
 
 ```rust
-use common_rs::lang::argument::{ArgumentError, ArgumentResult};
+use qubit_common::lang::argument::{ArgumentError, ArgumentResult};
 
 fn validate_config(port: u16, timeout: u64) -> ArgumentResult<()> {
     port.require_in_closed_range("port", 1024, 65535)?;
