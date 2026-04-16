@@ -258,7 +258,9 @@ impl<T> CollectionArgument for Vec<T> {
 
     #[inline]
     fn require_length_be(&self, name: &str, length: usize) -> ArgumentResult<&Self> {
-        self.as_slice().require_length_be(name, length).map(|_| self)
+        self.as_slice()
+            .require_length_be(name, length)
+            .map(|_| self)
     }
 
     #[inline]
