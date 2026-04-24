@@ -18,6 +18,11 @@
 //! Haixing Hu
 
 pub mod lang;
+#[path = "serde/mod.rs"]
+mod serde_impl;
+pub mod serde {
+    pub use super::serde_impl::*;
+}
 pub mod util;
 
 // Re-export main types from lang module
