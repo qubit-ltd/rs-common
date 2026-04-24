@@ -132,3 +132,59 @@ fn big_integer_edges() {
     let umax = u128::MAX;
     assert!(umax.require_greater_equal("u", 0u128).is_ok());
 }
+
+#[test]
+fn f32_covers_numeric_value_impl_and_nan_checks() {
+    assert!(0.0f32.require_zero("f").is_ok());
+    assert!(1.0f32.require_non_zero("f").is_ok());
+    assert!(f32::NAN.require_zero("f").is_err());
+    assert!(f32::NAN.require_non_zero("f").is_err());
+
+    assert!(1.0f32.require_positive("f").is_ok());
+    assert!(0.0f32.require_positive("f").is_err());
+    assert!(f32::NAN.require_positive("f").is_err());
+
+    assert!(0.0f32.require_non_negative("f").is_ok());
+    assert!((-1.0f32).require_non_negative("f").is_err());
+    assert!(f32::NAN.require_non_negative("f").is_err());
+
+    assert!((-1.0f32).require_negative("f").is_ok());
+    assert!(0.0f32.require_negative("f").is_err());
+    assert!(f32::NAN.require_negative("f").is_err());
+
+    assert!(0.0f32.require_non_positive("f").is_ok());
+    assert!(1.0f32.require_non_positive("f").is_err());
+    assert!(f32::NAN.require_non_positive("f").is_err());
+
+    assert!(0.5f32.require_in_closed_range("f", 0.0, 1.0).is_ok());
+    assert!(f32::NAN.require_in_closed_range("f", 0.0, 1.0).is_err());
+    assert!(0.5f32.require_in_closed_range("f", f32::NAN, 1.0).is_err());
+    assert!(0.5f32.require_in_closed_range("f", 0.0, f32::NAN).is_err());
+
+    assert!(0.5f32.require_in_open_range("f", 0.0, 1.0).is_ok());
+    assert!(f32::NAN.require_in_open_range("f", 0.0, 1.0).is_err());
+
+    assert!(0.5f32.require_less("f", 1.0).is_ok());
+    assert!(f32::NAN.require_less("f", 1.0).is_err());
+    assert!(0.5f32.require_less("f", f32::NAN).is_err());
+
+    assert!(0.5f32.require_less_equal("f", 1.0).is_ok());
+    assert!(f32::NAN.require_less_equal("f", 1.0).is_err());
+    assert!(0.5f32.require_less_equal("f", f32::NAN).is_err());
+
+    assert!(0.5f32.require_greater("f", 0.0).is_ok());
+    assert!(f32::NAN.require_greater("f", 0.0).is_err());
+    assert!(0.5f32.require_greater("f", f32::NAN).is_err());
+
+    assert!(0.5f32.require_greater_equal("f", 0.0).is_ok());
+    assert!(f32::NAN.require_greater_equal("f", 0.0).is_err());
+    assert!(0.5f32.require_greater_equal("f", f32::NAN).is_err());
+}
+
+#[test]
+fn f64_reject_nan_on_bound_arguments() {
+    assert!(1.0f64.require_less("v", f64::NAN).is_err());
+    assert!(1.0f64.require_less_equal("v", f64::NAN).is_err());
+    assert!(1.0f64.require_greater("v", f64::NAN).is_err());
+    assert!(1.0f64.require_greater_equal("v", f64::NAN).is_err());
+}

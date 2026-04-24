@@ -13,6 +13,68 @@ use qubit_common::{
     require_null_or,
 };
 
+fn is_positive(value: &i32) -> bool {
+    *value > 0
+}
+
+fn validate_positive(value: &i32) -> ArgumentResult<i32> {
+    if *value > 0 {
+        Ok(*value)
+    } else {
+        Err(ArgumentError::new("must be positive"))
+    }
+}
+
+#[test]
+fn test_named_function_instantiations_cover_all_option_branches() {
+    assert_eq!(Some(1).require_non_null("value").unwrap(), 1);
+    let error = None::<i32>.require_non_null("value").unwrap_err();
+    assert_eq!(error.to_string(), "Parameter 'value' cannot be null");
+
+    assert_eq!(
+        Some(1)
+            .require_non_null_and("value", is_positive, "must be positive")
+            .unwrap(),
+        1
+    );
+    let error = Some(0)
+        .require_non_null_and("value", is_positive, "must be positive")
+        .unwrap_err();
+    assert_eq!(error.to_string(), "Parameter 'value' must be positive");
+    let error = None::<i32>
+        .require_non_null_and("value", is_positive, "must be positive")
+        .unwrap_err();
+    assert_eq!(error.to_string(), "Parameter 'value' cannot be null");
+
+    assert_eq!(
+        Some(2)
+            .validate_if_present("value", validate_positive)
+            .unwrap(),
+        Some(2)
+    );
+    let error = Some(0)
+        .validate_if_present("value", validate_positive)
+        .unwrap_err();
+    assert_eq!(error.to_string(), "must be positive");
+    assert_eq!(
+        None::<i32>
+            .validate_if_present("value", validate_positive)
+            .unwrap(),
+        None
+    );
+
+    assert_eq!(
+        require_null_or("value", Some(3), is_positive, "must be positive").unwrap(),
+        Some(3)
+    );
+    let error = require_null_or("value", Some(0), is_positive, "must be positive").unwrap_err();
+    assert_eq!(error.to_string(), "Parameter 'value' must be positive");
+    assert_eq!(
+        require_null_or("value", None::<i32>, is_positive, "must be positive").unwrap(),
+        None
+    );
+}
+
 #[test]
 fn require_non_null_and_and_validate_if_present() {
     let v = Some(10);
